@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/tx  
+                      http://www.springframework.org/schema/tx/spring-tx.xsd  
+                      http://www.springframework.org/schema/aop  
+                      http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- <bean id="AmountTask" class="com.aiyounet.collect.util.task.CollectConfigTask"></bean> -->
+	<bean id="InitDataTask" class="com.aiyounet.client.util.task.InitDataTask"></bean>
+	<bean id="initRedisData"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="InitDataTask" />
+		</property>
+		<property name="targetMethod">
+			<value>initRedisData</value><!-- 执行的方法 -->
+		</property>
+	</bean>
+	<bean id="triggerInitRedisData" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="initRedisData" />
+		</property>
+		<property name="cronExpression">
+			<value>01 * * * * ?</value>
+		</property>
+	</bean>
+		<bean id="freemarkerRedisData"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="InitDataTask" />
+		</property>
+		<property name="targetMethod">
+			<value>freemarkerRedisData</value><!-- 执行的方法 -->
+		</property>
+	</bean>
+	<bean id="triggerFreemarkerRedisData" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="freemarkerRedisData" />
+		</property>
+		<property name="cronExpression">
+			<value>00 00 23 * * ?</value>
+		</property>
+	</bean>
+	<bean id="totalPlatDataByDate"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="InitDataTask" />
+		</property>
+		<property name="targetMethod">
+			<value>totalPlatDataByDate</value><!-- 执行的方法 -->
+		</property>
+	</bean>
+	<bean id="triggerTotalPlatDataByDate" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="totalPlatDataByDate" />
+		</property>
+		<property name="cronExpression">
+			<value>00 18 18 * * ?</value>
+		</property>
+	</bean>
+	<!--  ******************分割线******************  -->
+<!-- 	<bean id="getCollectConfigTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="AmountTask" />
+		</property>
+		<property name="targetMethod">
+			<value>test</value>执行的方法
+		</property>
+	</bean>
+	<bean id="triggerGetCollectConfigTask" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="getCollectConfigTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0/30 * * * * ?</value>
+		</property>
+	</bean> -->
+<!-- 	<bean id="collectProjectTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="AmountTask" />
+		</property>
+		<property name="targetMethod">
+			<value>executeCollect</value>执行的方法
+		</property>
+	</bean>
+	<bean id="triggerCollectProjectTask" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="collectProjectTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0/80 * * * * ?</value>
+		</property>
+	</bean> -->
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+<!-- 				<ref bean="triggerGetCollectConfigTask"/>
+				<ref bean="triggerCollectProjectTask"/>  -->
+					<ref bean="triggerInitRedisData"/>
+	<!-- 				<ref bean="triggerFreemarkerRedisData"/> -->
+					<ref bean="triggerTotalPlatDataByDate"/>
+			</list>
+		</property>
+		<property name="configLocation" value="classpath:resources/quartz.properties" />
+	</bean>  
+</beans>

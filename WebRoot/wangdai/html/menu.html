@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>菜单权限设置</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+	<script type="text/javascript" src="wangdai/js/menu.js"></script>
+	<div id="menuContent"></div>
+	<div id="menu-window" class="easyui-dialog" title="设置权限"
+		style="width:250px;height: 200px;" buttons="#menu-buttons" iconCls="icon-edit"
+		modal="true" closed="true">
+	<textarea id="menu-url" rows="8" cols="31"></textarea>	
+	</div>
+	<div id="menu-buttons">
+		<table>
+			<tr>
+				<td width="100"><a href="javascript:void(0);"
+					class="easyui-linkbutton" iconCls="icon-save"
+					onclick="Menu.setPass();">确定</a></td>
+				<td width="130"><a href="javascript:void(0);"
+					class="easyui-linkbutton" iconCls="icon-cancel"
+					onclick="javascript:$('#menu-window').dialog('close');">取消</a></td>
+			</tr>
+		</table>
+	</div>
+	<div id='toolbar'>
+		<a href="javascript:void(0);"
+					class="easyui-linkbutton" iconCls="icon-save"
+					onclick="Menu.showWin();">设置菜单权限</a>
+	</div>
+</body>
+</html>

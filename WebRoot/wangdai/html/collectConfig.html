@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>collectConfig.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<!-- 
+	<link rel="stylesheet" href="../../common/easyui/themes/icon.css" type="text/css"></link>
+  	<link rel="stylesheet" href="../../common/easyui/themes/default/easyui.css" type="text/css"></link>
+  	<link rel="stylesheet" href="../../common/easyui/themes/default/pagination.css" type="text/css"></link>
+  	<script type="text/javascript" src="../../common/easyui/jquery-1.7.2.min.js"></script>
+  	<script type="text/javascript" src="../../common/easyui/jquery.easyui.min.js"></script>
+  	<script type="text/javascript" src="../../common/easyui/locale/easyui-lang-zh_CN.js"></script>
+  	 -->
+ </head>
+  
+  <body>
+ 	<script type="text/javascript" src="wangdai/js/collectConfig.js"></script>
+  	<div id="collect_toolbar" >
+  		<label style="font-family: 楷体;font-size: 15px;font-weight: bold;">所属平台:</label>
+  		<input id="search_plat" class="easyui-combobox" style="width: 150px;"/> 
+  		<a class="easyui-linkbutton" iconCls="icon-search" onclick="CollectConfig.display();">查询</a>
+  		<a class="easyui-linkbutton" iconCls="icon-add" onclick="CollectConfig.add()">添加</a>
+  		<a class="easyui-linkbutton" iconCls="icon-save" onclick="CollectConfig.update()">修改</a>
+  		<a class="easyui-linkbutton" iconCls="icon-cut" onclick="CollectConfig.deleteCollect()">删除</a>
+  	</div>	
+  	<table id="dg" style="display: none;"></table>
+  	<div id="update_window" class="easyui-dialog" title="采集信息列表修改" style="width: 700px;height: 850px;" align="center">
+  		<br/><br/>
+  		<table border="0" width="90%">
+  			<tr><td><label>编号：</label></td><td><input type="text" id="id" disabled="disabled"/></td><td></td></tr>
+  			<tr>
+  				<td><label>采集开关：</label></td>
+  				<td>&nbsp;&nbsp;<input type="radio" name="switch" id="open" value="1"/>开&nbsp;&nbsp;<input type="radio" name="switch" id="close" value="0"/>关</td>
+  				<td><label>所属平台：</label></td><td><input id="plat" class="easyui-combobox" style="width: 155px;"  disabled="disabled"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集器ID：</label></td><td><input type="text" id="collection"/></td>
+  				<td><label>采集页数/天数：</label></td><td><input type="text" id="pages_days"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>最后采集时间：</label></td><td><input type="text" id="last_collect_time" disabled="disabled"/></td>
+  				<td><label>采集时间间隔：</label></td><td><input type="text" id="interval"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集路径1：</label></td><td colspan="3"><input type="text" id="url1" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集路径2：</label></td><td colspan="3"><input type="text" id="url2" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集规则：</label></td><td colspan="3"><input type="text" id="regular" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>其他规则：</label></td><td colspan="3"><input type="text" id="other_rule" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集标题规则：</label></td><td colspan="3"><input type="text" id="title" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集标题其他规则：</label></td><td colspan="3"><input type="text" id="other_title" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>发布时间规则：</label></td><td colspan="3"><input type="text" id="regular_publish_time" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>发布时间其他规则：</label></td><td colspan="3"><input type="text" id="rule_publish_time" style="width: 465px;"></td>
+  			</tr>
+  			<tr>
+  				<td><label>唯一编号规则：</label></td><td colspan="3"><input type="text" id="regular_sole_number" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>唯一编号其他规则：</label></td><td colspan="3"><input type="text" id="rule_sole_number" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>利率规则：</label></td><td colspan="3"><input type="text" id="rate" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>利率其他规则：</label></td><td colspan="3"><input type="text" id="rule_rate" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>借款总额规则：</label></td><td colspan="3"><input type="text" id="regular_loan_money" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>借款总额其他规则：</label></td><td colspan="3"><input type="text" id="rule_loan_money" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款期限规则：</label></td><td colspan="3"><input type="text" id="regular_repayment_date" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款期限其他规则：</label></td><td colspan="3"><input type="text" id="rule_repayment_date" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款方式规则：</label></td><td colspan="3"><input type="text" id="regular_repayment_type" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款方式其他规则：</label></td><td colspan="3"><input type="text" id="rule_repayment_type" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>投标进度规则：</label></td><td colspan="3"><input type="text" id="regular_bid_schedule" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>投标进度其他规则：</label></td><td colspan="3"><input type="text" id="rule_bid_schedule" style="width: 465px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>关键字(按页获取)：</label></td><td><input type="text" id="collect_url_page"/></td>
+  				<td><label>关键字(按时间获取)：</label></td><td><input type="text" id="collect_url2_page"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集类型：</label></td>
+  				<td>&nbsp;&nbsp;
+  					<input type="radio" name="collect_type" id="days"/>天数&nbsp;&nbsp;
+  					<input type="radio" name="collect_type" id="pages"/>页数
+  				</td>
+  				<td><label>路径类型：</label></td>
+  				<td>&nbsp;&nbsp;
+  					<input type="radio" name="url_type" id="html"/>html&nbsp;&nbsp;
+  					<input type="radio" name="url_type" id="json"/>json
+  				</td>
+  			</tr>
+  			<tr>
+  				<td><label>伪静态：</label></td>
+  				<td>&nbsp;&nbsp;
+  					<input type="radio" name="is_rewrite" id="yes"/>是&nbsp;&nbsp;&nbsp;&nbsp;
+  					<input type="radio" name="is_rewrite" id="no"/>否
+  				</td>
+  				<td><label>时间格式化：</label></td>
+  				<td><input type="text" id="publish_formater"/></td>
+  			</tr>
+  		</table>
+  		<div style="padding-top: 30px;">
+  			<a class="easyui-linkbutton" onclick="CollectConfig.updateCollectConfig();" iconCls="icon-save" id="collectConfig_update_btn">保存</a>
+  			<a class="easyui-linkbutton" onclick="CollectConfig.cancelUpdate();" iconCls="icon-cancel" id="collectConfig_cancelUpdate_btn">取消</a>
+  		</div>
+  	</div>
+  	<div id="add_window" class="easyui-dialog" style="width: 700px;height: 830px;" title="增加采集信息" align="center">
+  		<br/><br/>
+  		<table border="0" width="90%">
+  			<tr>
+  				<td><label>采集开关：</label></td>
+  				<td>&nbsp;&nbsp;
+  					<input type="radio" name="switch" id="add_open" value="1" checked="checked"/>开&nbsp;&nbsp;
+  					<input type="radio" name="switch" id="add_close" value="0"/>关
+  				</td>
+  				<td><label>所属平台：</label></td><td><input id="add_plat" class="easyui-combobox" style="width: 155px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集器ID：</label></td><td><input type="text" id="add_collection"/></td>
+  				<td><label>采集页数/天数：</label></td><td><input type="text" id="add_pages_days"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集时间间隔：</label></td><td><input type="text" id="add_interval"/></td>
+  				<td><label>采集类型：</label></td>
+  				<td>
+  					<input type="radio" name="collect_type" id="add_days"checked="checked"/>天数
+  					<input type="radio" name="collect_type" id="add_pages"/>页数
+  				</td>
+  			</tr>
+  			<tr>
+  				<td><label>采集路径1：</label></td><td colspan="3"><input type="text" id="add_url1" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集路径2：</label></td><td colspan="3"><input type="text" id="add_url2" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集规则：</label></td><td colspan="3"><input type="text" id="add_regular" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>其他规则：</label></td><td colspan="3"><input type="text" id="add_other_rule" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集标题规则：</label></td><td colspan="3"><input type="text" id="add_title" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>采集标题其他规则：</label></td><td colspan="3"><input type="text" id="add_other_title" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>发布时间规则：</label></td><td colspan="3"><input type="text" id="add_regular_publish_time" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>发布时间其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_publish_time" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>唯一编号规则：</label></td><td colspan="3"><input type="text" id="add_regular_sole_number" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>唯一编号其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_sole_number" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>利率规则：</label></td><td colspan="3"><input type="text" id="add_rate" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>利率其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_rate" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>借款总额规则：</label></td><td colspan="3"><input type="text" id="add_regular_loan_money" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>借款总额其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_loan_money" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款期限规则：</label></td><td colspan="3"><input type="text" id="add_regular_repayment_date" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款期限其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_repayment_date" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款方式规则：</label></td><td colspan="3"><input type="text" id="add_regular_repayment_type" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>还款方式其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_repayment_type" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>投标进度规则：</label></td><td colspan="3"><input type="text" id="add_regular_bid_schedule" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>投标进度其他规则：</label></td><td colspan="3"><input type="text" id="add_rule_bid_schedule" style="width: 450px;"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>关键字(页数)：</label></td><td><input type="text" id="add_collect_url_page"/></td>
+  				<td><label>关键字(时间)：</label></td><td><input type="text" id="add_collect_url2_page"/></td>
+  			</tr>
+  			<tr>
+  				<td><label>路径类型：</label></td>
+  				<td>
+  					<input type="radio" name="url_type" id="add_html" checked="checked"/>html
+  					<input type="radio" name="url_type" id="add_json"/>json
+  				</td>
+  				<td><label>伪静态：</label></td>
+  				<td>
+  					<input type="radio" name="is_rewrite" id="add_yes" checked="checked"/>是
+  					<input type="radio" name="is_rewrite" id="add_no"/>否
+  				</td>
+  			</tr>
+  			<tr>
+  				<td><label>时间格式化：</label></td>
+  				<td><input type="text" id="add_publish_formatter"/></td>
+  				<!-- <td><label>地址错误次数：</label></td>
+  				<td><input type="text" id="add_error_count" value="0"/></td> -->
+  			</tr>
+  			<!-- <tr>
+  				<td><label>采集信息是否错误：</label></td>
+  				<td>
+  					<input type="radio" name="add_regular_error" id="error"/>错误
+  					<input type="radio" name="add_regular_error" id="right" checked="checked"/>正确
+  				</td>
+  			</tr> -->
+  		</table>
+  		<div style="padding-top: 30px;">
+  			<a class="easyui-linkbutton" onclick="CollectConfig.addCollectConfig();" iconCls="icon-save" id="collectConfig_addCol_btn">保存</a>
+  			<a class="easyui-linkbutton" onclick="CollectConfig.cancelAdd();" iconCls="icon-cancel" id="collectConfig_cancelCol_btn">取消</a>
+  		</div>
+  	</div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<script type="text/javascript" src="wangdai/js/userAcco.js"></script>
+	<div id="p" title="My Panel" collapsible="true"
+		style="padding:10px;height: 30px;font: 12px;">
+		用户名 :<input type="text" id="username" style="height: 20px;"> <a
+			href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-search mini" onclick="reloadGrid();">确定</a> <select id="style"
+			style="font-size: 11px;font-family: 微软雅黑">
+			<option value="0">完全匹配</option>
+			<option value="1">模糊查询</option>
+		</select> <a href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-add " onclick="UserAcco.openEditer();"
+			style="margin-left: 20px;">添加管理员</a> <a href="javascript:void(0);"
+			class="easyui-linkbutton" iconCls="icon-no "
+			onclick="UserAcco.deleted();" style="margin-left: 20px;">删除管理员</a>
+	</div>
+	<table id="useraccotable">
+	</table>
+	<div id="dd" style="width:230px;height:300px;padding:10px;">
+		<div id="qxmenu"></div>
+	</div>
+	<div id="dlg-buttons">
+		<table cellpadding="0" cellspacing="0" style="width:100%">
+			<tr>
+				<td style="text-align:center;"><a href="#" 
+					class="easyui-linkbutton" iconCls="icon-save"
+					onclick="UserAcco.setAcco();">确定</a> <a href="#"
+					class="easyui-linkbutton" iconCls="icon-cancel"
+					onclick="UserAcco.close();">关闭</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="addManager-window" class="easyui-dialog" title="当前位置：添加管理员"
+		style="padding:10px 20px;width:380px; height: 200px;"
+		buttons="#edit-buttons" iconCls="icon-edit2" modal="true"
+		closed="true" cache="false">
+		管理员帐号:<input type="text" id='new_name'>
+		<p>&nbsp;</p>
+		管理员密码:<input type='text' id='passWord'>
+	</div>
+	<div id="edit-buttons">
+		<a href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-ok2" onclick="UserAcco.addManager();">确定</a> <a
+			href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-ok2" onclick="UserAcco.closeEditer();">取消</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>网贷后台</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="common/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="common/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="common/css/main.css" />
+<script type="text/javascript" src="common/easyui/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="common/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="common/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="common/easyui/jquery.form.js"></script>
+<script type="text/javascript">
+	var path = '';
+	var basePath = '';
+</script>
+<script type="text/javascript" src="common/js/ZeroClipboard.js"></script> 
+<script type="text/javascript" src="common/js/DateUtil.js"></script>
+<script type="text/javascript" src="common/js/sys.js"></script>
+<script type="text/javascript" src="common/js/json.js"></script>
+<script type="text/javascript" src="common/js/cookies.js"></script>
+<script type="text/javascript" src="common/js/init.js"></script>
+<script type="text/javascript" src="wangdai/js/menu.js"></script>
+<script type="text/javascript" src="wangdai/js/groupMenu.js"></script>
+<script type="text/javascript" src="common/js/constant.js"></script>
+<!-- <script type="text/javascript" src="common/js/jquery.hoverIntent.minified.js"></script> -->
+</head>
+<body class="easyui-layout">
+	<div region="north" style="overflow:hidden;height:38px;" border="false">
+		<div id="panel"
+			style="background-repeat: no-repeat;background-position: left;background-size:auto;background-color: rgb(255,255,255)">
+			<div id="header_tabs">
+				<div id="link_button">
+				<p>
+			        <a href="javascript:void(0)" id="mb1" icon="icon-edit">全部菜单</a>
+			    </p>
+				</div>
+				<div id="header_links">
+					<!--  <p>
+						可选平台：&nbsp;&nbsp;  <input class="easyui-combobox" id="showPlatForm"/>
+					</p>-->
+					<p>
+						您好！<strong><label id="loginAccount"></label> </strong>
+						&nbsp;&nbsp;[&nbsp;<a target="_parent" href="javascript:void(0);"
+							onclick="outLogin();"> 注销</a>&nbsp;]
+					</p>
+					<p>
+						<a href="javascript:void(0);" id="closeChat" class="btnlink">关闭提示</a>
+					</p>
+				</div>
+				<div id="header_lang"></div>
+			</div>
+		</div>
+	</div>
+	<!--  
+	<div region="west" split="true" style="width:200px;">
+		<div id="aa" style="width:190px;" class="easyui-accordion">
+			<div title="菜单选项" selected="true"
+				style="overflow:auto;padding:10px;">
+				<div id="menu"
+					style="font-family:微软雅黑;font-weight: 800;font-style: inherit;color: rgb(170,170,170);"></div>
+			</div>
+		</div>
+
+	</div>
+	-->
+	<div region="center" style="overflow:hidden;" border="false">
+		<div id="main" style="width:100%;height:100%;"></div>
+	</div>
+	<div id="p" class="easyui-progressbar" style="width:400px;"></div>
+
+	<div id="mm1" style="width:200px;">
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>updatePass.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+	<script type="text/javascript" src="wangdai/js/updatePass.js"></script>
+	<div align="center" style="padding: 150px;background: rgb(230,242,251);">
+		<div class="easyui-panel" title="修改密码" id="updateDiv"
+			style="width: 400px;height: 300px;padding: 40px 0px;" >
+			<form id="updateFrom">
+			<div style="margin-bottom: 20px;">
+				<label for="oldPass">旧密码:</label> <input class="easyui-validatebox"
+					id="oldPass" type="password" required="true">
+			</div>
+			<div style="margin-bottom: 20px;">
+				<label for="newPass">新密码:</label> <input id="newPass"
+					type="password" class="easyui-validatebox" required="true">
+			</div>
+			<div  style="margin-bottom: 20px;">
+				<label for="newPassT">&nbsp;&nbsp;&nbsp;重复:</label> <input
+					class="easyui-validatebox" required="true" id="newPassT"
+					type="password">
+			</div>
+			<div>
+			<a href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-ok" onclick="UpdatePass.update();">确定修改</a>
+			</div>
+			</form>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>后台登录</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="common/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="common/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="common/css/main.css" />
+<body style="background: #ccc;">
+	<div style="heigth:400px;width:400px; margin:0 auto; margin-top:300px;">
+		<div id="p" class="easyui-dialog" title="会员登录" iconCls="icon-save " modal="true"
+			style="width:360px;padding:10px;background:#fafafa;font-size: 12px;font-family: 微软雅黑;"
+			 buttons="#but">
+			<label>用户名:</label>
+			&nbsp;<input type="text" id="userName" style="width: 200px;margin: 10px;" ><br/> 
+			<label>密&nbsp;&nbsp;&nbsp;码:</label><input id="passWord"
+				type="password" style="width: 200px;margin: 20px;" ><div style="height: 10px;"></div>
+				<label>验证码:</label><input type="text" id="code"
+				style="width: 60px;margin-left:20px;" > <img
+								src="sys/createAuthcode.do" name="img1" id="authcode" align="top"/>
+								 <a
+								id="reloadauthcode"
+								style="font-weight: bolder; font-size: 12px; color: black; cursor: pointer;text-align: center;">看不清楚？</a><br />
+		</div>
+	</div>
+	<div id="but">
+				<a href="javascript:void(0);" onclick="Login.login();" iconCls="icon-sum"
+				class="easyui-linkbutton" iconCls="icon-ok mini" >确定</a>					<a
+				href="http://sscplat.aiyounet.cn/regist.html"
+				style="color: red;font-size: 12px;margin: 10px;">注册会员</a>
+	</div>
+</body>
+
+<script type="text/javascript" src="common/easyui/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="common/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="common/easyui/jquery.form.js"></script>
+<script type="text/javascript" src="common/js/sys.js"></script>
+<script type="text/javascript" src="common/js/json.js"></script>
+<script type="text/javascript"  src="wangdai/js/login.js"></script></head>
+</html>

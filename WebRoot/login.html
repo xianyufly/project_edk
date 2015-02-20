@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+	<title>登陆</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<link href="css/login_css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="css/login_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/login_css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="css/login_css/templatemo_style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="common/easyui/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="common/easyui/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="common/js/sys.js"></script>
+	<script type="text/javascript" src="common/js/json.js"></script>
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" id="loginFrom" role="form" action="sys/login.do" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<div class="alert alert-error hide" id="errorMsg">
+							<button class="close" data-dismiss="alert"></button>
+							<span>请输入账号和密码.</span>
+						</div>
+		            </div>		            	            
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+		            	<input type="text" class="form-control form-flag" name="username" id="username" placeholder="账号">
+		            </div>		            	            
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+		            	<input type="password" class="form-control form-flag" name="password" id="password" placeholder="密码">
+		            </div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          			<input type="text" class="form-code form-flag" name="code" id="code" placeholder="验证码">
+			            	<img src="sys/createAuthcode.do" name="img1"  class="form-code-img"id="authcode" align="top"/>
+							<a id="reloadauthcode" class="form-code-clear" >看不清楚？</a>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="submit" value="登录" class="btn btn-info" id="loginBtn">
+		          	</div>
+		          </div>
+		        </div>
+		      </form>
+		      <div class="text-center">
+		      	<span  class="templatemo-create-new">
+		      		 版权所有：COPYRIGHT © 2015-2020 E代看 版权所有
+		      	</span>
+		      </div>
+		</div>
+	</div>
+	<script type="text/javascript" src="basicFunc/js/login.js"></script>
+	<!-- 登录JS -->
+	<script type="text/javascript">
+	$(function(){
+	        $('#loginBtn').click(function(){
+	          		login();
+	                return false;
+	        });
+	    	$("#reloadauthcode").click(function(){
+					var date = new Date();
+					$('#authcode').attr('src','sys/createAuthcode.do?date=' + date.getTime());
+			});
+			$('input').keydown(function (e) { //这里给function一个事件参数命名为e，叫event也行，随意的，e就是IE窗口发生的事件。
+			    var key = e.which; //e.which是按键的值
+			    if (key == 13) {
+			    	login();
+			    }
+	});
+	});
+	</script>
+</body>
+</html>

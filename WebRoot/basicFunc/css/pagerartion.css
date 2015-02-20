@@ -1,0 +1,67 @@
+a.l-btn span span span.l-btn-empty {
+	display: inline-block;
+	padding: 0px;
+	width: 16px;
+	height: 15px;
+}
+
+a.l-btn span.l-btn-left {
+	display: inline-block;
+	padding: 4px 4px 4px 4px;
+	line-height: 16px;
+	height: 16px;
+}
+
+textarea,input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],.uneditable-input
+	{
+	display: inline-block;
+	height: 22px;
+	/*padding: 4px 6px;*/
+	margin-bottom: 0px;
+	font-size: 12px;
+	line-height: 20px;
+	color: #555555;
+/*	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;*/
+}
+
+select {
+	width: 50px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(187, 187, 187);
+}
+
+.pagination-info {
+	float: right;
+	padding-right: 6px;
+	padding-top: 8px;
+	font-size: 13px;
+	font-family: 微软雅黑;
+	margin-top: 3px;
+}
+.pagination-num{
+	width:30px;
+	margin-top: 4px;
+}
+.pagination span {
+	line-height: 35px;
+	border-width: 0px 0px 0px 0px;
+}
+
+.pagination {
+	margin: 0px 0px !important;
+	display:block;
+	border-radius:0px;
+}
+
+.panel-body{
+	padding: 0px !important;
+}
+.pagination a, .pagination span{
+		background-color: rgb(239, 239, 239);
+}
+
+.pagination select {
+	width:60px !important;	
+}

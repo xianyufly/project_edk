@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>loginLog.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  
+  <body>
+  	<script type="text/javascript" src="wangdai/js/loginLog.js"></script>
+  	<div id="tool" title="工具栏" class="easyui-panel"
+		style="height: 60PX;padding: 3px 5px 10px 10px;">
+			<input id="ss"></input>
+		<div id="mm" style="width:120px;">
+			<div id='us' name="userName" iconCls="icon-ok">用户名</div>
+		</div>
+		<a
+			href="javascript:void(0);" class="easyui-linkbutton"
+			style="margin-left: 20px;" iconCls="icon-search mini"
+			onclick="LoginLog.search();">查询</a> 
+	</div>
+    <table id="loginTable" style="height: 730px;">
+	</table>
+  </body>
+</html>

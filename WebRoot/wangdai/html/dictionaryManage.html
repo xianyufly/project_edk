@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dictionaryManage.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+  <!--	<link rel="stylesheet" href="../../common/easyui/themes/icon.css" type="text/css"></link>
+  	<link rel="stylesheet" href="../../common/easyui/themes/default/easyui.css" type="text/css"></link>
+  	<link rel="stylesheet" href="../../common/easyui/themes/default/pagination.css" type="text/css"></link>
+  	<script type="text/javascript" src="../../common/easyui/jquery-1.7.2.min.js"></script>
+  	<script type="text/javascript" src="../../common/easyui/jquery.easyui.min.js"></script>
+  	<script type="text/javascript" src="../../common/easyui/locale/easyui-lang-zh_CN.js"></script>
+    -->
+  </head>
+  
+  <body>
+ 	 <script type="text/javascript" src="wangdai/js/dictionary.js"></script>
+  
+  	 
+  	 	 	<!-- <a class="easyui-linkbutton" iconCls="icon-search" onclick="DictionaryManage.display();">查询</a> -->
+  	 	 	
+  	 	 	<!-- 修改记录 -->
+  	 	 	<div id="edit_window" class="easyui-dialog" style="width: 320px;height: 230px;" title="修改字典" align="center">
+	  	 	 	<!-- <br/>&nbsp;&nbsp;<label>请修改。。</label><br/><br/> -->
+	  	 	 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>编号：</label>&nbsp;&nbsp;<input type="text" id="e_id" disabled="disabled"/><br/><br/>
+	  	 	 	<span style="display: block;" id="tag">
+	  	 	 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>父标签：</label><input type="text" id="p_tag" class="easyui-combobox" style="width: 155px;"/></span>
+	  	 	 	<br/>
+	  	 	 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	 	 	<label>子标签：</label><input type="text" id="c_tag"/><br/><br/>
+	  	 	 	<a class="easyui-linkbutton" onclick="DictionaryManage.updateDictionary();" iconCls="icon-save" id="dic_update_btn">确定</a>
+	  	 	 	&nbsp;&nbsp;&nbsp;<a class="easyui-linkbutton" onclick="DictionaryManage.cancelUpdate();" iconCls="icon-cancel" id="dic_cancelUpdate_btn">取消</a>
+  	 	 	</div>
+  	 	 	
+  	 	 	<!-- 添加记录 -->
+  	 	 	<div id="insert_window" class="easyui-dialog" style="width: 350px;height: 280px;" title="添加字典" align="center">
+	  	 	 	<br/><br/><br/>
+	  	 	 	<label>一级标签：</label><input type="text" id="p_add" class="easyui-combobox" style="width: 155px;"/> 
+	  	 	 	<br/><br/>
+	  	 	 	<span  style="display: none;" id="two">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	 	 		<label>二级标签：</label><input type="text" id="c_add" class="easyui-combobox"  style="width: 155px;"/>
+	  	 	 	</span>
+	  	 	 	<span  style="display: none;" id="new">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	 	 		<label>新标签：</label><input type="text" id="p_newAAdd"  style="width: 155px;"/>
+	  	 	 	</span><br/>
+	  	 	 	<span  style="display: none;" id="c_new">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	 	 		<label>新标签：</label><input type="text" id="c_newAdd"  style="width: 155px;"/>
+	  	 	 	</span>
+	  	 	 	<span  style="display: none;" id="t_new">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	 	 		<label>三级标签：</label><input type="text" id="t_newAdd"  style="width: 155px;"/>
+	  	 	 	</span>
+	  	 	 	<br/><br/>
+	  	 	 	<a class="easyui-linkbutton" onclick="DictionaryManage.addDictionary();" iconCls="icon-save" id="dic_add_btn">确定</a>
+	  	 	 	&nbsp;&nbsp;&nbsp;
+	  	 	 	<a class="easyui-linkbutton" onclick="DictionaryManage.cancelAdd();" iconCls="icon-cancel" id="dic_cancelAdd_btn">取消</a>
+  	 	 	</div>
+   			<div id="batch_window" class="easyui-dialog" style="width:600px;height:290px;" title="批量关联平台">
+   				<table style="width:580px;"   cellspacing=0 cellpadding=0>		
+			  		
+			  		<tr><td  align="right" style="border:#E6E6E6 2px solid;">已关联的平台：</td><td style="border:#E6E6E6 2px solid;"><textarea  rows="5" cols="50" id="exit_existPlat"></textarea></td></tr>
+			  		<tr><td  align="right"style="border:#E6E6E6 2px solid;">增加或删除关联平台：</td><td style="border:#E6E6E6 2px solid;"><textarea  rows="5" cols="50" id="exit_addPlat"></textarea></td></tr>
+			  		<tr><td  align="left"colspan="2" style="border:#E6E6E6 2px solid;"><font color="#DF0101">说明：增加或删除平台请用逗号隔开，例：陆金所,人人贷</font></td></tr>
+			  		<tr><td  align="right" style="border:#E6E6E6 2px solid;"></td><td style="border:#E6E6E6 2px solid;"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'"onclick="DictionaryManage.addPlat();" id="dic_addPlat_btn">增加</a>
+			  		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cut'"onclick="DictionaryManage.deletePlat();" id="dic_deletePlat_btn">删除</a></td></tr>
+  				</table>
+   			</div>
+   			
+    <table id="dg" class="easyui-datagrid"></table>
+    <div id="dic_toolbar">
+    	<label>请输入关键字：</label>
+  	 	<input id="str" class="easyui-searchbox"/>
+  	 	<a class="easyui-linkbutton" iconCls="icon-add" onclick="DictionaryManage.add()">添加</a>
+  		<a class="easyui-linkbutton" iconCls="icon-save" onclick="DictionaryManage.update()">修改</a>
+  		<a class="easyui-linkbutton" iconCls="icon-cut" onclick="DictionaryManage.deleteDic()">删除</a>
+  		<a class="easyui-linkbutton" iconCls="icon-add" onclick="DictionaryManage.batchPlat()">批量关联平台</a>
+    </div>
+  </body>
+</html>

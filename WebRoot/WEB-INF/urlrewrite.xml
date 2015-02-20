@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlrewrite>
+<!-- 	<rule>
+		<from>/index/(\w*)-(\w*).shtml</from>
+		<to>/index/$1.do?labels=$2</to>
+	</rule> -->
+<!-- 	<rule>
+		<from>/index/index.shtml/(\w*)-(\w*).shtml</from>
+		<to>/index/$1.do?labels=$2&amp;searchWord=$3</to>
+	</rule> -->
+	<rule>
+		<from>/index/projectSearch/p(\w*)t(\w*)s(\w*).html</from>
+		<to>/index/projectSearch.do?plats=$1&amp;labels=$2&amp;showPlat=$3</to>
+	</rule>
+	<rule>
+		<from>/index/project.shtml</from>
+		<to>/index/project.do</to>
+	</rule>
+	<rule>
+		<from>/index/platSearch/l(\w*)w(\w*)s(\w*).html</from>
+		<to>/index/platSearch.do?labels=$1&amp;searchWord=$2&amp;showMore=$3</to>
+	</rule>
+	<rule>
+		<from>platSearch.shtml</from>
+		<to>/index/platSearch.do</to>
+	</rule>
+		<rule>
+		<from>index/projectDetail/(\w*).shtml</from>
+		<to>/index/projectDetail.do?projectNumber=$1</to>
+	</rule>
+<!-- 	<rule>
+		<from>/index/project</from>
+		<to>/index/project.do</to>
+	</rule> -->
+	<rule>
+		<from>/index/(\w*).shtml</from>
+		<to>/index/$1.do</to>
+	</rule>
+</urlrewrite>
+<!-- 跳转 -->

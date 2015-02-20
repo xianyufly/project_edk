@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache name="SearchCache">
+  <defaultCache
+      maxElementsInMemory="10000"
+      eternal="false"
+      timeToIdleSeconds="3600"
+      timeToLiveSeconds="3600"
+      overflowToDisk="false"
+      memoryStoreEvictionPolicy="LFU"/>
+      
+  <cache name="resultCache"
+  		 eternal="false"
+  		 timeToIdleSeconds="3600"
+      	 timeToLiveSeconds="3600"
+         maxElementsInMemory = "5000"
+         overflowToDisk = "false"
+         memoryStoreEvictionPolicy = "LFU">
+  </cache>
+  
+</ehcache>

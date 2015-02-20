@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="c:/log" />
+	<!--  <property name="LOG_HOME" value="/home/httpd/html/go.jztssc.com/log" />  -->
+
+ 	<property resource="resources/config.properties" />
+	<!-- 控制台输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	<!-- 操作索引按照每天生成日志文件 -->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${LOG_HOME}/%d{yyyy-MM-dd}/ssc.%d{yyyy-MM-dd HH}.log
+			</FileNamePattern>
+			<!-- 保留最近天数 -->
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource	class="ch.qos.logback.core.db.DataSourceConnectionSource">
+			<dataSource class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
+				<serverName>${database.serverName}</serverName>
+				<port>${database.port}</port>
+				<databaseName>${database.username}</databaseName>
+				<user>${database.username}</user>
+				<password>${database.password}</password>
+			</dataSource>
+		</connectionSource>
+	</appender>
+	<logger name="org.hibernate" level="WARN" />
+<!-- 	<logger name="org.apache.ibatis" level="DEBUG" /> -->
+	<logger name="org.springframework" level="WARN" />
+	<logger name="com.mchang" level="WARN" />
+	<!--	<logger name="com.aiyounet.sscplat.crtl" level="WARN">
+		<appender-ref ref="DB" />
+	</logger> -->
+	<root level="INFO">
+			<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

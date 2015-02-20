@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PlatManage.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<!-- <link rel="stylesheet" type="text/css" href="./styles.css">
+<link rel="stylesheet" href="/common/easyui/themes/icon.css"
+	type="text/css"></link>
+<link rel="stylesheet" href="/common/easyui/themes/default/easyui.css"
+	type="text/css"></link>
+<link rel="stylesheet"
+	href="/common/easyui/themes/default/pagination.css" type="text/css"></link>
+<script type="text/javascript" src="/common/easyui/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/common/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="/common/easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+
+</head> -->
+
+
+<body>
+<script type="text/javascript" src="js/pro.js"></script>
+<script type="text/javascript" src="js/city.js"></script>
+<script type="text/javascript" src="wangdai/js/platmanage.js"></script>
+
+<table id="dg" class="easyui-datagrid"
+	style="display:none;"
+	url="/wangdai/platmanage/getPlatManageList.do" toolbar="#toolbar"
+	rownumbers="true" fitColumns="true" singleSelect="true"
+	pagination="true" pageSize="20" fit="true">
+	<thead>
+		<tr>
+
+			<th field="plat_name" width="50">平台名称</th>
+			<th field="plat_img_l" width="100" formatter="Formatter.platImgL">平台图标（大）</th>
+			<!--  formatter="Formatter.platImgS"-->
+			<th field="plat_img_s" width="100" formatter="Formatter.platImgS">平台图标（小）</th>
+			<th field="plat_url" width="58">平台官网地址</th>
+			<th field="start_time" width="50">期限开始时间</th>
+			<th field="end_time" width="50">期限结束时间</th>
+			<th field="on_line_time" width="50">上线时间</th>
+			<th field="regist_money" width="58">注册资金（万元）</th>
+			<th field="d_name" width="55">保障方式</th>
+			<th field="start_word" width="50">首字母</th>
+			<th field="plat_intro" width="50">平台介绍</th>
+			<th field="money_explain" width="50">资费说明</th>
+			<th field="belong_area" width="50" formatter="Formatter.belongArea">所属地区</th>
+			<th field="rate_limit" width="50">利率范围</th>
+			<th field="projects" width="100">项目</th>
+			<th field="tags" width="100">标签</th>
+			<th field="user_evaluate_avg" width="50">用户口碑平均分</th>
+			<th field="service_avg" width="50">服务平均分</th>
+			<th field="experience_avg" width="50">体验平均分</th>
+			<th field="safe_avg" width="50">安全平均分</th>
+
+		</tr>
+	</thead>
+</table>
+<!-- <a href="#"
+		class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+		onclick="platManage.showDeletePlat();">删除用户</a> -->
+<div id="toolbar">
+	<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+		onclick="platManage.showAddPlatDiv();">平台添加</a> <a href="#"
+		class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+		onclick="platManage.showupdatePlatDiv();">修改平台</a>  <a href="#"
+		class="easyui-linkbutton" iconCls="icon-add" plain="true"
+		onclick="platManage.showAddProjectDiv();">项目选择</a> <a href="#"
+		class="easyui-linkbutton" iconCls="icon-add" plain="true"
+		onclick="platManage.showAddTagDiv();">标签选择</a><a href="#"
+		class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+		onclick="platManage.showJiadeDeletePlat();">删除</a>
+
+</div>
+
+<div id="addPlat" class="easyui-dialog" align="center">
+	
+<form id="addPlatForm" method="post" enctype="multipart/form-data">
+	<table border="0">
+		<tr>
+			<td>平台名称：</td>
+			<td><input type="text" id="platNameA" class="easyui-validatebox" name="plat_name"
+				validtype="CHS" /></td>
+		</tr>
+			<tr>
+				<td>平台图标（大）:</td>
+				<td><input type="file" id="platImgL" name="mylfile"></td>
+			</tr>
+			<tr>
+				<td>平台图标（小）:</td>
+				<td><input type="file" id="platImgS" name="mysfile">
+				</td>
+			</tr>
+		<tr>
+			<td>平台官网地址:</td>
+			<td><input type="text" id="platUrl" name="plat_url"
+				validtype="url"
+				invalidMessage="url格式不正确[http://www.baidu.com]"></td>
+		</tr>
+		<tr>
+			<td>期限开始时间:</td>
+			<td><input type="date" id="startTime" name="start_time"></td>
+		</tr>
+		<tr>
+			<td>期限结束时间:</td>
+			<td><input type="date" id="endTime"	name="end_time"></td>
+		</tr>
+		<tr>
+			<td>上线时间:</td>
+			<td><input type="date" id="onLineTime" name="on_line_time"></td>
+		</tr>
+		<tr>
+			<td>注册资金（万元）:</td>
+			<td><input type="text" id="registMoney" name="regist_money"	class="easyui-numberbox"
+				validtype="num"
+				invalidMessage="请填写数字"></td>
+		</tr>
+		<tr>
+			<td>保障方式:</td>
+			<td><input id="protectionType" class="easyui-combobox"	
+				style="width: 150px;"><br> <input id="protectionType2"
+				class="easyui-combobox" name="protection_type" style="visibility: hidden;width: 150px;">
+			</td>
+		</tr>
+		<!-- <tr>
+			<td>首字母:</td>
+			<td><input type="text" id="startWord"></td>
+		</tr> -->
+		
+		<tr>
+			<td>平台介绍:</td>
+			<td><input type="text" id="platIntro"	name="plat_intro"></td>
+		</tr>
+		<tr>
+			<td>资费说明:</td>
+			<td><input type="text" id="moneyExplain"	name="money_explain"></td>
+		</tr>
+		<tr>
+			<td>所属地区:</td>
+			<td><input id="belongArea" name="belong_area" class="easyui-combobox"
+				style="width: 150px;"><br> <input id="belongArea2"
+				class="easyui-combobox" style="visibility: hidden;width: 150px;" ></td>
+		</tr>
+		<tr>
+			<td>利率范围:</td>
+			<td><input type="text" id="rateLimit"	class="easyui-validatebox" name="rate_limit"></td>
+		</tr>
+
+		<tr>
+			<td><!-- <a href="#" class="easyui-linkbutton" iconCls="icon-ok"
+				onclick="platManage.addPlat();">保存</a> --><input type="submit" value="保存"></td>
+			<td><!-- <a href="#" onclick="platManage.cancel();">取消</a> -->
+				<input type="button" value="关闭" onclick="platManage.cancel();"></td>
+		</tr>
+	</table>
+</form>
+</div>
+
+<div id="addProject" class="easyui-dialog" align="center">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="addProject2"></div>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
+		onclick="platManage.AddProject();">保存</a> <a href="#"
+		class="easyui-linkbutton" iconCls="icon-cancel"
+		onclick="platManage.cancelAddProjectDiv();">取消</a>
+
+</div>
+<div id="addTag" class="easyui-dialog" align="center">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="addTag2"></div>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
+		onclick="platManage.AddTag();">保存</a> <a href="#"
+		class="easyui-linkbutton" iconCls="icon-cancel"
+		onclick="platManage.cancelAddTagDiv();">取消</a>
+
+</div>
+<div id="deletePlat" class="easyui-dialog" align="center">
+	<br> <br> <br> <br> <label>是否删除？？？？？</label><br>
+	<br> <br> <br> <a href="#" class="easyui-linkbutton"
+		iconCls="icon-ok" onclick="platManage.deletePlat();">确定</a> <a
+		href="#" class="easyui-linkbutton" iconCls="icon-cancel"
+		onclick="platManage.cancel();">取消</a>
+
+</div>
+<div id="jiadeDeletePlat" class="easyui-dialog" align="center">
+<br> <br> <br> <br> <label>是否执行虚拟删除？？？？？</label><br>
+	<br> <br> <br> <a href="#" class="easyui-linkbutton"
+		iconCls="icon-ok" onclick="platManage.jiadeDeletePlat();">确定</a> <a
+		href="#" class="easyui-linkbutton" iconCls="icon-cancel"
+		onclick="platManage.cancel();">取消</a>
+</div>
+<div id="updatePlat" class="easyui-dialog" align="center">
+<form id="updatePlatForm" method="post" enctype="multipart/form-data">
+	<br><br>
+	<table border="0">
+		<input type="hidden" id="id" name="id"/>
+		<tr>
+			<td>平台名称：</td>
+			<td><input type="text" id="platNameU" name="plat_name" class="easyui-validatebox">
+			</td>
+		</tr>
+		<tr>
+			<td>平台图标（大）:</td>
+			<td><input type="file" id="platImgLU" name="mylfile"></td>
+		</tr>
+		<tr>
+			<td>平台图标（小）:</td>
+			<td><input type="file" id="platImgSU" name="mysfile">
+			</td>
+		</tr>
+		<tr>
+			<td>平台官网地址:</td>
+			<td><input type="text" id="platUrlU" name="plat_url"></td>
+		</tr>
+		<tr>
+			<td>期限开始时间:</td>
+			<td><input type="date" id="startTimeU" name="start_time"></td>
+		</tr>
+		<tr>
+			<td>期限结束时间:</td>
+			<td><input type="date" id="endTimeU" name="end_time"></td>
+		</tr>
+		<tr>
+			<td>上线时间:</td>
+			<td><input type="date" id="onLineTimeU" name="on_line_time"></td>
+		</tr>
+		<tr>
+			<td>注册资金（万元）:</td>
+			<td><input type="text" id="registMoneyU" name="regist_money"></td>
+		</tr>
+		<tr>
+			<td>保障方式:</td>
+			<td><input id="protectionTypeU" style="width: 150px;"><br>
+				<input id="protectionType2U" name="protection_type"
+				style="visibility: hidden; width: 150px;"></td>
+		</tr>
+		<!-- <tr>
+			<td>首字母:</td>
+			<td><input type="text" id="startWordU"></td>
+		</tr> -->
+		
+		<tr>
+			<td>平台介绍:</td>
+			<td><input type="text" id="platIntroU" name="plat_intro"></td>
+		</tr>
+		<tr>
+			<td>资费说明:</td>
+			<td><input type="text" id="moneyExplainU" name="money_explain"></td>
+		</tr>
+	<tr>
+			<td>所属地区:</td>
+			<td><input id="belongAreaU" class="easyui-combobox"
+				style="width: 150px;"><br> <input id="belongArea2U"
+				class="easyui-combobox" name="belong_area" style="visibility: hidden;width: 150px;" ></td>
+		</tr>
+		<tr>
+			<td>利率范围:</td>
+			<td><input type="text" id="rateLimitU" name="rate_limit"></td>
+		</tr>
+		<!-- <tr>
+			<td>修改项目:</td>
+			<td><a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+		onclick="platManage.showAddProjectDiv();">修改项目</a>
+			</td>
+		</tr>
+		<tr>
+			<td>修改标签:</td>
+			<td><a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+		onclick="platManage.showAddTagDiv();">修改标签</a>
+			</td>
+		</tr> -->
+
+		<tr>
+			<td><!-- <a href="#" class="easyui-linkbutton" iconCls="icon-ok"
+				onclick="platManage.updatePlat();">确定</a> --><input type="submit" value="确定"></td>
+			<td><!-- <a href="#" onclick="platManage.cancel();">取消</a> -->
+				<input type="button" value="关闭" onclick="platManage.cancel();"></td>
+		</tr>
+	</table>
+</form>
+
+
+</div>
+</body>
+
+</html>
